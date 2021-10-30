@@ -1,0 +1,48 @@
+<html class="bg-gray-50">
+    <head>
+        <!-- Tailwind from a CDN for POC -->
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    </head>
+    <main class="container mx-auto p-4">
+        <div class="flex mb-4">
+            <img src="{{.Branding.LogoUrl}}" width="{{.Branding.LogoWidth}}" width="{{.Branding.LogoHeight}}" />
+            {{ if .Branding.CompanyName }}
+                <span class="self-center px-4 font-semibold">{{.Branding.CompanyName}}</span>
+            {{ end }}
+        </div>
+        <h1 class="text-5xl text-gray-800 font-bold mb-4">{{.Heading}}</h1>
+        <p class="text-lg text-gray-800 font-semibold mb-4">{{.Description}}</p>
+        <form id="form" class="flex flex-col">
+            {{range .Fields}}
+                <div class="mb-4">
+                    <label class="text-gray-800" for="{{.Name}}">{{.Label}}:</label>
+                    <input class="text-gray-800 border-solid border-2" name="{{.Name}}" />
+                    <div class="text-gray-600 text-sm">{{.HelpText}}</div>
+                </div>
+            {{end}}
+            <div class="mt-6">
+                <button class="rounded bg-gray-800 text-white px-6 py-3" type="submit">Submit</button>
+            </div>
+        </form>
+    </main>
+    <script>
+        const form = document.getElementById("form");
+        form.addEventListener('submit', function(e){
+            e.preventDefault();
+            const fields = {
+                {{range .Fields}}
+                    "{{.Name}}": document.getElementsByName('{{.Name}}')[0].value,
+                {{end}}
+            }
+            fetch('{{.Endpoint}}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(fields)
+            }).then((response)=> {
+                console.log(response)
+            })
+        })
+    </script>
+</html>

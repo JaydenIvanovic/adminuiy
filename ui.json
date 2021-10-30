@@ -1,0 +1,24 @@
+{
+  "branding": {
+    "logoUrl": "https://www.softwaretidbits.dev/_next/image?url=%2Fimages%2Flogo.png&w=640&q=75",
+    "logoWidth": "50px",
+    "logoHeight": "50px",
+    "companyName": "Acme Inc"
+  },
+  "heading": "Collect names",
+  "description": "A simple form that collects names. This will appear on a number of our key pages.",
+  "fields": [
+    {
+      "label": "First name",
+      "name": "firstName",
+      "type": "string"
+    },
+    {
+      "label": "Last name",
+      "name": "lastName",
+      "type": "string",
+      "helpText": "We will use this for payroll."
+    }
+  ],
+  "endpoint": "http://localhost:3000/api/collect-names"
+}
