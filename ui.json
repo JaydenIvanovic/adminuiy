@@ -1,24 +1,52 @@
 {
+  "title": "Internal tooling",
   "branding": {
     "logoUrl": "https://www.softwaretidbits.dev/_next/image?url=%2Fimages%2Flogo.png&w=640&q=75",
     "logoWidth": "50px",
     "logoHeight": "50px",
     "companyName": "Acme Inc"
   },
-  "heading": "Collect names",
-  "description": "A simple form that collects names. This will appear on a number of our key pages.",
-  "fields": [
+  "elements": [
     {
-      "label": "First name",
-      "name": "firstName",
-      "type": "string"
+      "type": "form",
+      "name": "name_collector",
+      "heading": "Collect names",
+      "description": "A simple form that collects names. This will appear on a number of our key pages.",
+      "fields": [
+        {
+          "label": "First name",
+          "name": "firstName",
+          "type": "string"
+        },
+        {
+          "label": "Last name",
+          "name": "lastName",
+          "type": "string",
+          "helpText": "We will use this for payroll."
+        }
+      ],
+      "endpoint": "http://localhost:3000/api/collect-names"
     },
     {
-      "label": "Last name",
-      "name": "lastName",
-      "type": "string",
-      "helpText": "We will use this for payroll."
+      "type": "form",
+      "name": "promo_bar",
+      "heading": "Create a promotion bar",
+      "description": "Fill out this form to create a promotion bar to be displayed on the site. Please ensure that there aren't any running promotions which may conflict with this one.",
+      "fields": [
+        {
+          "label": "Message",
+          "name": "message",
+          "type": "string",
+          "helpText": "The message you want to appear on the promo bar"
+        },
+        {
+          "label": "Link",
+          "name": "link",
+          "type": "string",
+          "helpText": "When a user clicks on the promo bar, they will visit this URL"
+        }
+      ],
+      "endpoint": "http://localhost:3000/api/collect-names"
     }
-  ],
-  "endpoint": "http://localhost:3000/api/collect-names"
+  ]
 }
