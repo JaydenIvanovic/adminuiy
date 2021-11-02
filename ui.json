@@ -46,7 +46,22 @@
           "helpText": "When a user clicks on the promo bar, they will visit this URL"
         }
       ],
-      "endpoint": "http://localhost:3000/api/collect-names"
+      "endpoint": "http://localhost:3000/api/promo/create"
+    },
+    {
+      "type": "form",
+      "name": "gdpr_forget_user",
+      "heading": "GDPR forget user",
+      "description": "Anonymise data for a given user under GDPR",
+      "fields": [
+        {
+          "label": "Email",
+          "name": "email",
+          "type": "string",
+          "helpText": "Email of the user to be forgotten"
+        }
+      ],
+      "endpoint": "http://localhost:3000/api/user/forget"
     }
   ]
 }

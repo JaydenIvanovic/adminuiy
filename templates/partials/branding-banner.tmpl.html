@@ -1,0 +1,8 @@
+{{define "branding-banner"}}
+<div class="flex mb-4">
+    <img src="{{.Branding.LogoUrl}}" width="{{.Branding.LogoWidth}}" width="{{.Branding.LogoHeight}}" />
+    {{ if .Branding.CompanyName }}
+        <span class="self-center px-4 font-semibold">{{.Branding.CompanyName}}</span>
+    {{ end }}
+</div>
+{{end}}
