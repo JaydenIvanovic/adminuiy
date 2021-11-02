@@ -62,6 +62,36 @@
         }
       ],
       "endpoint": "http://localhost:3000/api/user/forget"
+    },
+    {
+      "type": "form",
+      "name": "gdpr_forget_user_2",
+      "heading": "GDPR forget user",
+      "description": "Anonymise data for a given user under GDPR",
+      "fields": [
+        {
+          "label": "Email",
+          "name": "email",
+          "type": "string",
+          "helpText": "Email of the user to be forgotten"
+        }
+      ],
+      "endpoint": "http://localhost:3000/api/user/forget"
+    },
+    {
+      "type": "form",
+      "name": "gdpr_forget_user_3",
+      "heading": "GDPR forget user",
+      "description": "Anonymise data for a given user under GDPR",
+      "fields": [
+        {
+          "label": "Email",
+          "name": "email",
+          "type": "string",
+          "helpText": "Email of the user to be forgotten"
+        }
+      ],
+      "endpoint": "http://localhost:3000/api/user/forget"
     }
   ]
 }
