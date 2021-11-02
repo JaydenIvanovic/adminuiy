@@ -1,21 +1,21 @@
-<html class="bg-gray-50">
+<html class="bg-gray-800">
     <head>
         {{ template "common-head" . }}
     </head>
+    {{ template "branding-banner" . }}
     <main class="container mx-auto p-4">
-        {{ template "branding-banner" . }}
-        <h1 class="text-5xl text-gray-800 font-bold mb-4">{{.Heading}}</h1>
-        <p class="text-lg text-gray-800 font-semibold mb-4">{{.Description}}</p>
+        <h1 class="text-5xl text-white font-bold mb-4 tracking-wide">{{.Heading}}</h1>
+        <p class="text-lg text-white font-semibold mb-4">{{.Description}}</p>
         <form id="form" class="flex flex-col">
             {{range .Fields}}
                 <div class="mb-4">
-                    <label class="text-gray-800" for="{{.Name}}">{{.Label}}:</label>
-                    <input class="text-gray-800 border-solid border-2" name="{{.Name}}" />
-                    <div class="text-gray-600 text-sm">{{.HelpText}}</div>
+                    <label class="text-white" for="{{.Name}}">{{.Label}}:</label>
+                    <input class="text-white border-solid border-2" name="{{.Name}}" />
+                    <div class="text-gray-200 text-sm">{{.HelpText}}</div>
                 </div>
             {{end}}
             <div class="mt-6">
-                <button class="rounded bg-gray-800 text-white px-6 py-3" type="submit">Submit</button>
+                <button class="rounded bg-green-600 hover:bg-green-500 text-white px-6 py-3" type="submit">Submit</button>
             </div>
         </form>
     </main>
