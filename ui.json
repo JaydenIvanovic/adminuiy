@@ -92,6 +92,27 @@
         }
       ],
       "endpoint": "http://localhost:3000/api/user/forget"
+    },
+    {
+      "type": "list",
+      "name": "users_list",
+      "heading": "Users",
+      "description": "Get a list of users",
+      "fields": [
+        {
+          "label": "Name",
+          "name": "name",
+          "type": "list_field",
+          "json_field": ".first_name"
+        },
+        {
+          "label": "Email",
+          "name": "email",
+          "type": "list_field",
+          "json_field": ".email_address"
+        }
+      ],
+      "endpoint": "http://localhost:3000/api/users"
     }
   ]
 }

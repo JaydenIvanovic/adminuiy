@@ -5,6 +5,11 @@ type FormView struct {
 	Form
 }
 
+type ListView struct {
+	Branding
+	List
+}
+
 type RootView struct {
 	Branding
 	Heading string

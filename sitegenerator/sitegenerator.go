@@ -81,8 +81,33 @@ func parseElements(root models.Root) {
 				panic(err)
 			}
 			createForm(root, form)
+		case "list":
+			var list models.List
+			rawData, err := json.Marshal(element)
+			if err != nil {
+				panic(err)
+			}
+			err = json.Unmarshal(rawData, &list)
+			if err != nil {
+				panic(err)
+			}
+			createList(root, list)
 		default:
 			panic("passed element which doesn't exist")
 		}
+	}
+}
+
+func createList(root models.Root, list models.List) {
+	templateFile := templatefs.GetElementTemplatePath("list")
+	tmpl := templatefs.MustParseTemplateFile(templateFile)
+
+	f := mustCreateHtmlFile(list.Name)
+	fv := models.ListView{
+		Branding: root.Branding,
+		List:     list,
+	}
+	if err := tmpl.Execute(f, fv); err != nil {
+		panic(err)
 	}
 }

@@ -33,3 +33,18 @@ type Branding struct {
 	LogoHeight  string
 	CompanyName string
 }
+
+type List struct {
+	Name        string
+	Heading     string
+	Description string
+	Fields      []ListField
+	Endpoint    string
+}
+
+type ListField struct {
+	Label     string
+	Name      string
+	Type      string
+	JsonField string
+}
