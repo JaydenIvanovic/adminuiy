@@ -103,13 +103,13 @@
           "label": "Name",
           "name": "name",
           "type": "list_field",
-          "json_field": ".first_name"
+          "jsonField": "first_name"
         },
         {
           "label": "Email",
           "name": "email",
           "type": "list_field",
-          "json_field": ".email_address"
+          "jsonField": "email_address"
         }
       ],
       "endpoint": "http://localhost:3000/api/users"

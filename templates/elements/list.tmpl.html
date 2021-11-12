@@ -1,1 +1,29 @@
-<div>List goes here</div>
+<html class="bg-gray-800">
+    <head>
+        {{ template "common-head" . }}
+    </head>
+    {{ template "branding-banner" . }}
+    <main class="container mx-auto p-4">
+        <h1 class="text-5xl text-white font-bold mb-4 tracking-wide">{{.Heading}}</h1>
+        <p class="text-lg text-white font-semibold mb-4">{{.Description}}</p>
+        <div data-results class="flex flex-col"></div>
+    </main>
+    <script>
+        fetch('{{.Endpoint}}', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+        }).then((response)=> {
+            const resultsContainer = document.querySelector("[data-results]");
+            response.json().then(data => {
+                const listRow = data.map(result => {
+                    const fields = [];
+                    {{range .Fields}}fields.push("<div class=\"text-white\">" + result[{{.JsonField}}] + "</div>");{{end}}
+                    return `<div class="flex flex-row space-x-8">${fields.join('')}</div>`
+                }).join('')
+                resultsContainer.innerHTML = listRow;
+            })
+        })
+    </script>
+</html>

@@ -102,12 +102,12 @@ func createList(root models.Root, list models.List) {
 	templateFile := templatefs.GetElementTemplatePath("list")
 	tmpl := templatefs.MustParseTemplateFile(templateFile)
 
-	f := mustCreateHtmlFile(list.Name)
-	fv := models.ListView{
+	file := mustCreateHtmlFile(list.Name)
+	listView := models.ListView{
 		Branding: root.Branding,
 		List:     list,
 	}
-	if err := tmpl.Execute(f, fv); err != nil {
+	if err := tmpl.Execute(file, listView); err != nil {
 		panic(err)
 	}
 }
