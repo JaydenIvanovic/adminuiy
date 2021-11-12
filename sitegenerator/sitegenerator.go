@@ -1,7 +1,6 @@
 package sitegenerator
 
 import (
-	"encoding/json"
 	"fmt"
 	"os"
 
@@ -13,6 +12,29 @@ func BuildStaticFiles(root models.Root) {
 	mustCreateOutputDir()
 	buildRootPage(root)
 	parseElements(root)
+}
+
+func parseElements(root models.Root) {
+	for _, element := range root.Elements {
+		e := Element{
+			Name: element.(map[string]interface{})["name"].(string),
+			Type: element.(map[string]interface{})["type"].(string),
+			Data: element,
+		}
+		switch e.Type {
+		case FormElement:
+			createElement(root, e, "form")
+		case ListElement:
+			createElement(root, e, "list")
+		case CrudElement:
+			crudViews := []string{"crud_list", "crud_detail"}
+			for _, view := range crudViews {
+				createElement(root, e, view)
+			}
+		default:
+			panic(fmt.Sprintf("passed element (%s) which doesn't exist", e.Name))
+		}
+	}
 }
 
 func mustCreateOutputDir() {
@@ -28,20 +50,6 @@ func mustCreateHtmlFile(fileName string) *os.File {
 		panic(err)
 	}
 	return f
-}
-
-func createForm(root models.Root, form models.Form) {
-	templateFile := templatefs.GetElementTemplatePath("form")
-	tmpl := templatefs.MustParseTemplateFile(templateFile)
-
-	f := mustCreateHtmlFile(form.Name)
-	fv := models.FormView{
-		Branding: root.Branding,
-		Form:     form,
-	}
-	if err := tmpl.Execute(f, fv); err != nil {
-		panic(err)
-	}
 }
 
 func buildRootPage(root models.Root) {
@@ -67,47 +75,20 @@ func buildRootPage(root models.Root) {
 	}
 }
 
-func parseElements(root models.Root) {
-	for _, element := range root.Elements {
-		switch element.(map[string]interface{})["type"].(string) {
-		case "form":
-			var form models.Form
-			rawData, err := json.Marshal(element)
-			if err != nil {
-				panic(err)
-			}
-			err = json.Unmarshal(rawData, &form)
-			if err != nil {
-				panic(err)
-			}
-			createForm(root, form)
-		case "list":
-			var list models.List
-			rawData, err := json.Marshal(element)
-			if err != nil {
-				panic(err)
-			}
-			err = json.Unmarshal(rawData, &list)
-			if err != nil {
-				panic(err)
-			}
-			createList(root, list)
-		default:
-			panic("passed element which doesn't exist")
-		}
-	}
-}
-
-func createList(root models.Root, list models.List) {
-	templateFile := templatefs.GetElementTemplatePath("list")
+func createElement(root models.Root, element Element, templateName string) {
+	templateFile := templatefs.GetElementTemplatePath(templateName)
 	tmpl := templatefs.MustParseTemplateFile(templateFile)
 
-	file := mustCreateHtmlFile(list.Name)
-	listView := models.ListView{
+	file := mustCreateHtmlFile(element.Name)
+	data := struct {
+		Branding models.Branding
+		Data     interface{}
+	}{
 		Branding: root.Branding,
-		List:     list,
+		Data:     element.Data,
 	}
-	if err := tmpl.Execute(file, listView); err != nil {
+
+	if err := tmpl.Execute(file, data); err != nil {
 		panic(err)
 	}
 }

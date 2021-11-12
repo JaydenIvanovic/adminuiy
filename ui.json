@@ -94,25 +94,23 @@
       "endpoint": "http://localhost:3000/api/user/forget"
     },
     {
-      "type": "list",
-      "name": "users_list",
+      "type": "crud",
+      "name": "users",
       "heading": "Users",
-      "description": "Get a list of users",
+      "description": "CRUD operations for users",
       "fields": [
         {
           "label": "Name",
           "name": "name",
-          "type": "list_field",
-          "jsonField": "first_name"
+          "type": "string"
         },
         {
           "label": "Email",
           "name": "email",
-          "type": "list_field",
-          "jsonField": "email_address"
+          "type": "string"
         }
       ],
-      "endpoint": "http://localhost:3000/api/users"
+      "endpoint": "http://localhost:3000/api/adminuiy/users"
     }
   ]
 }

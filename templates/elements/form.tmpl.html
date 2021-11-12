@@ -4,14 +4,14 @@
     </head>
     {{ template "branding-banner" . }}
     <main class="container mx-auto p-4">
-        <h1 class="text-5xl text-white font-bold mb-4 tracking-wide">{{.Heading}}</h1>
-        <p class="text-lg text-white font-semibold mb-4">{{.Description}}</p>
+        <h1 class="text-5xl text-white font-bold mb-4 tracking-wide">{{.Data.heading}}</h1>
+        <p class="text-lg text-white font-semibold mb-4">{{.Data.description}}</p>
         <form id="form" class="flex flex-col">
-            {{range .Fields}}
+            {{range .Data.fields}}
                 <div class="mb-4">
-                    <label class="text-white" for="{{.Name}}">{{.Label}}:</label>
+                    <label class="text-white" for="{{.Name}}">{{.label}}:</label>
                     <input class="text-white border-solid border-2" name="{{.Name}}" />
-                    <div class="text-gray-200 text-sm">{{.HelpText}}</div>
+                    <div class="text-gray-200 text-sm">{{.helpText}}</div>
                 </div>
             {{end}}
             <div class="mt-6">
@@ -24,11 +24,11 @@
         form.addEventListener('submit', function(e){
             e.preventDefault();
             const fields = {
-                {{range .Fields}}
-                    "{{.Name}}": document.getElementsByName('{{.Name}}')[0].value,
+                {{range .Data.fields}}
+                    "{{.Name}}": document.getElementsByName('{{.name}}')[0].value,
                 {{end}}
             }
-            fetch('{{.Endpoint}}', {
+            fetch('{{.Data.endpoint}}', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

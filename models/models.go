@@ -48,3 +48,11 @@ type ListField struct {
 	Type      string
 	JsonField string
 }
+
+type CrudModel struct {
+	Name        string
+	Heading     string
+	Description string
+	Fields      []Field
+	Endpoint    string
+}

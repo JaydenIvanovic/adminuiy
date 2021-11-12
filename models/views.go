@@ -10,6 +10,11 @@ type ListView struct {
 	List
 }
 
+type CrudModelView struct {
+	Branding
+	CrudModel
+}
+
 type RootView struct {
 	Branding
 	Heading string

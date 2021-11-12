@@ -19,7 +19,7 @@
             response.json().then(data => {
                 const listRow = data.map(result => {
                     const fields = [];
-                    {{range .Data.Fields}}fields.push("<div class=\"text-white\">" + result[{{.JsonField}}] + "</div>");{{end}}
+                    {{range .Data.Fields}}fields.push("<div class=\"text-white\">" + result[{{.Name}}] + "</div>");{{end}}
                     return `<div class="flex flex-row space-x-8">${fields.join('')}</div>`
                 }).join('')
                 resultsContainer.innerHTML = listRow;

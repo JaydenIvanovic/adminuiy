@@ -6,3 +6,8 @@ Instead, define the forms as json, and work on what matters.
 
 ## Generate form
 `go run main.go ui.json ui.tmpl.html > ui.html`
+
+## TODOs
+- Only include required styles. Don't import tailwindcss via a CDN.
+- Add basic CRUD support
+- Define expected API contract for List views (how is the response structured?, what form of pagination? etc)
